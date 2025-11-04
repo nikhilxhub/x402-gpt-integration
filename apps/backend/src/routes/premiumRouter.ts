@@ -1,6 +1,6 @@
 import { Request, Response, Router } from "express";
 import { validatePremiumBody } from "../middleware/requestValidation";
-// import { prismaClient } from "@repo/db/client"
+
 import { findApiKeyToModel } from "@repo/db/client";
 
 import { createPaymentRequest } from "../services/paymentService";

@@ -1,10 +1,7 @@
-import { prismaClient } from "..";
+import { prismaClient } from ".";
 
 export const findApiKeyToModel = async (modelKey:string) =>{
 
-    // return  await prismaClient.apiKey.findFirst({
-    //   where: modelKey ? { api_key: modelKey } : undefined,
-    // });
 
     if (!modelKey) return null;
 

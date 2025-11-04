@@ -9,6 +9,8 @@
     "dev": "pnpm run build && pnpm run start"
   },
   "dependencies": {
+    "@ai-sdk/google": "^2.0.27",
+    "@ai-sdk/openai": "^2.0.62",
     "@repo/db": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@solana/web3.js": "^1.98.4",
