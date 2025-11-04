@@ -21,6 +21,8 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "@prisma/client": "^6.18.0"
+    "@prisma/client": "^6.18.0",
+
+    "@repo/typescript-config": "workspace:*"
   }
 }
