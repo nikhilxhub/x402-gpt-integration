@@ -77,7 +77,7 @@ premiumRouter.post(
       // Log / store usage if desired (omitted for brevity)
 
       return res.json({
-        paidTxSignature: verifyResult.txSignature,
+        paidTxSignature: verifyResult.signature,
         ai: aiResponse,
       });
 

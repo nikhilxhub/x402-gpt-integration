@@ -7,5 +7,15 @@ export function createPaymentRequest(opts:{
 
 }){
 
+    console.log("New payment quote requested...");
+    return {
+        receiver: opts.receiver,
+        amountLamports: opts.amountLamports,
+        memo: opts.memo || ""
+
+    }
+
+
+
 
 }
