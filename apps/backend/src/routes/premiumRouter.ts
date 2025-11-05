@@ -41,7 +41,7 @@ premiumRouter.post(
         const paymentRequest = createPaymentRequest({
           receiver,
           amountLamports: rateLamports,
-          memo: `payment for model:${apiKeyEntry.api_model}`,
+          memo: `payment for model:${aiModel}`,
           expiresInSec: 300,
         });
 
@@ -67,6 +67,8 @@ premiumRouter.post(
       }
 
       // Payment successful on-chain — now call the LLM via vercel ai
+      console.log("sending call to model...");
+      
       const aiResponse = await callModel_Api({
         model: aiModel,
         prompt,

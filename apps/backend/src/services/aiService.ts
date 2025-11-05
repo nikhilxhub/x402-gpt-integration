@@ -1,16 +1,28 @@
-export function callModel_Api(opts:{
+import { callGEMINI } from "../aiModels/gemini";
+import { callGPT4 } from "../aiModels/gpt4";
+import { callGROQ } from "../aiModels/groq";
+
+export async function callModel_Api(opts:{
 
     model:string,
     prompt:string,
     api_key:string
 }){
+    
     const { model, prompt, api_key } = opts;
-    if(model=="gpt-4"){
+    
+    switch(model){
+        case "gpt-4":
+            return await callGPT4(prompt, api_key);
 
-    }
-    if(model == "gemini"){
+        case "gemini-2.5-pro":
+            return await callGEMINI(prompt, api_key);
 
-        
+        case "groq":
+            return await callGROQ(prompt, api_key);
+
+        default:
+            throw new Error("Unsupported model...");
     }
 
 

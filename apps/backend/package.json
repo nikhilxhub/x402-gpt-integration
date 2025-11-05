@@ -10,10 +10,12 @@
   },
   "dependencies": {
     "@ai-sdk/google": "^2.0.27",
+    "@ai-sdk/groq": "^2.0.28",
     "@ai-sdk/openai": "^2.0.62",
     "@repo/db": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@solana/web3.js": "^1.98.4",
+    "ai": "^5.0.87",
     "axios": "^1.12.2",
     "bs58": "^6.0.0",
     "cors": "^2.8.5",
