@@ -7,8 +7,9 @@ import { log } from "./utils/logger";
 import { askFirstRunWalletChoice } from "./prompt/askFirstRun";
 import { askSecretForImport } from "./prompt/askSecretForImport";
 import { importWalletFromString } from "./wallet/importWalletFromString";
-import cluster from "cluster";
+import ora from "ora";
 import { loadWallet } from "./wallet/loadWallet";
+import { askPrompt } from "./prompt/askPrompt";
 
 
 
@@ -62,8 +63,59 @@ export async function runCli() {
     // cfg.backendUrl = await askBackendUrl(cfg.backendUrl);
     // saveConfig(cfg);
 
-    log.info(`Model: ${cfg.modelKey} | ${cfg.cluster}`);
+    log.info(`Model: ${cfg.modelKey} | Cluster: ${cfg.cluster}`);
     const wallet = loadWallet(cfg.walletPath);
+    log.info(`Wallet: ${wallet.publicKey.toBase58()}`);
+
+    showHelp();
+
+
+    while(true){
+        const input = await askPrompt();
+
+        if(!input){
+            continue;
+
+        }
+
+        if(input == ":exit"){
+            break;
+
+        }
+        if(input == ":help"){
+
+
+        }
+
+        if(input == ":change_model"){
+
+
+        }
+
+        if(input == ":change_cluster"){
+
+
+        }
+
+
+        if (input === ":pub_key") {
+            log.info(`Your Wallet Address: ${wallet.publicKey.toBase58()}`);
+            continue;
+        }
+
+        const spinner = ora("Sending prompt...").start();
+
+        try{
+
+
+        }catch(e: any){
+            spinner.fail("Request failed");
+            log.err(e.message || String(e));
+        }
+        
+    }
+
+    log.ok("GoodBye..!");
 
 }
 
