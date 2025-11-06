@@ -12,7 +12,7 @@ export async function callModel_Api(opts:{
     const { model, prompt, api_key } = opts;
     
     switch(model){
-        case "gpt-4":
+        case "gpt-3.5-turbo":
             return await callGPT4(prompt, api_key);
 
         case "gemini-2.5-pro":

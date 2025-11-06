@@ -1,0 +1,1 @@
+export type ModelKey = "gemini-2.5-pro" | "gpt-3.5-turbo";
