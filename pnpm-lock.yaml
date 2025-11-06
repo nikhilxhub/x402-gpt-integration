@@ -93,6 +93,10 @@ importers:
       ora:
         specifier: ^9.0.0
         version: 9.0.0
+    devDependencies:
+      '@types/node':
+        specifier: ^22.15.3
+        version: 22.15.3
 
   apps/web:
     dependencies:

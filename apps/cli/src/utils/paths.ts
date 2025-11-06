@@ -18,5 +18,5 @@ export function configPath() {
 }
 
 export function walletPath() {
-  return join(appDir(), "wallet.json");
+  return join(appDir(), "walletx.json");
 }

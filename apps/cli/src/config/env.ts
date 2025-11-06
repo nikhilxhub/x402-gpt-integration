@@ -1,5 +1,5 @@
-import dotenv from "dotenv";
-dotenv.config();
+// import dotenv from "dotenv";
+// dotenv.config();
 
 
 export const ENV: {
@@ -7,7 +7,7 @@ export const ENV: {
   BACKEND_URL: string;
 } = {
 
-    SOLANA_RPC_URL: process.env.SOLANA_RPC_URL || "https://api.devnet.solana.com",
+    SOLANA_RPC_URL: "https://api.devnet.solana.com",
 
     BACKEND_URL: "https://localhost:3000",
 
