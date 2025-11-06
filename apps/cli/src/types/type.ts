@@ -1,3 +1,4 @@
+import { Keypair } from "@solana/web3.js";
 import { ClusterKey } from "./ClusterKey";
 import { ModelKey } from "./ModelKey";
 
@@ -24,3 +25,9 @@ export interface PremiumResponseOK {
 
 
 
+export interface userPrompt {
+    modelKey: string;
+    cluster: "devnet" | "mainnet-beta";
+    wallet: Keypair;
+    prompt: string;
+}

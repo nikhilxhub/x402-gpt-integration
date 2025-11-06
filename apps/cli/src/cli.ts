@@ -1,6 +1,6 @@
 import chalk from "chalk";
 import figlet from "figlet"
-import { loadConfig, saveConfig } from "./config/config";
+import { loadConfig } from "./config/config";
 import { hasWallet } from "./wallet/hasWallet";
 import { createWallet } from "./wallet/createWallet";
 import { log } from "./utils/logger";
@@ -10,6 +10,8 @@ import { importWalletFromString } from "./wallet/importWalletFromString";
 import ora from "ora";
 import { loadWallet } from "./wallet/loadWallet";
 import { askPrompt } from "./prompt/askPrompt";
+import { changeModel } from "./commands/changeModel";
+import { changeCluster } from "./commands/changeCluster";
 
 
 
@@ -83,16 +85,24 @@ export async function runCli() {
 
         }
         if(input == ":help"){
-
+            showHelp();
+            continue;
 
         }
 
         if(input == ":change_model"){
-
+            // const { changeModel } = await import("./commands/changeModel.js");
+           
+            await changeModel();
+            cfg = loadConfig();
+            continue;
 
         }
 
         if(input == ":change_cluster"){
+            await changeCluster();
+            cfg = loadConfig();
+            continue;
 
 
         }
@@ -107,6 +117,18 @@ export async function runCli() {
 
         try{
 
+            const result = await sendPremiumPrompt({
+                
+                modelKey: cfg.modelKey,
+                cluster: cfg.cluster,
+                wallet,
+                prompt: input
+            });
+
+            spinner.succeed("Paid & received response!");
+            console.log(chalk.greenBright("\nAnswer:\n"));
+            console.log(result.ai);
+            console.log(chalk.gray(`\nTx: ${result.paidTxSignature}\n`));
 
         }catch(e: any){
             spinner.fail("Request failed");
