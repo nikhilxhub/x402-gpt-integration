@@ -9,7 +9,7 @@ export async function sendPremiumPrompt(opts:userPrompt) {
     
 
 
-    const url = `${ENV.BACKEND_URL}/api/premium`;
+    const url = `${ENV.BACKEND_URL}/premium`;
 
     try{
         // withour header..
@@ -43,7 +43,7 @@ export async function sendPremiumPrompt(opts:userPrompt) {
 
             const r2 = await axios.post(
                 url,
-                { prompt: opts.prompt, modelKey: opts.modelKey },
+                { prompt: opts.prompt, model: opts.modelKey },
                 {
                 headers: { "x402-signed-tx": signedBase64 },
                 validateStatus: () => true

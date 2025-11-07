@@ -9,7 +9,7 @@ export const ENV: {
 
     SOLANA_RPC_URL: "https://api.devnet.solana.com",
 
-    BACKEND_URL: "https://localhost:3000",
+    BACKEND_URL: "http://localhost:3000",
 
     // DEFAULT_MODEL: "gemini-2.5-pro",
 

@@ -1,7 +1,9 @@
 // import { PrismaClient } from "@prisma/client";
 // import { findApiKeyToModel } from "./services/apiService";
 
-import { PrismaClient } from "./src/generated/prisma/client";
+import { PrismaClient } from "@prisma/client";
+
+// import { PrismaClient } from "./src/generated/client";
 
 // export { findApiKeyToModel };
 
