@@ -80,31 +80,31 @@ export async function verifyAndSendSignedTransaction(params: {
 
     // stimulate tx..
 
-    // const messageV0 = new TransactionMessage({
-    //   payerKey: tx.feePayer!,
-    //   recentBlockhash: tx.recentBlockhash!,
-    //   instructions: tx.instructions,
-    // }).compileToV0Message();
+    const messageV0 = new TransactionMessage({
+      payerKey: tx.feePayer!,
+      recentBlockhash: tx.recentBlockhash!,
+      instructions: tx.instructions,
+    }).compileToV0Message();
 
     // Create VersionedTransaction
-    // const versionedTx = new VersionedTransaction(messageV0);
+    const versionedTx = new VersionedTransaction(messageV0);
 
     // Simulate
     console.log("Simulating transaction...");
-    // const simulation = await connection.simulateTransaction(versionedTx);
+    const simulation = await connection.simulateTransaction(versionedTx);
     // const simulation = await connection.simulateTransaction(tx);
 
-    // if (simulation.value.err) {
+    if (simulation.value.err) {
 
-    //       console.log("logs:...", simulation.value.err);
-    // console.log("logs:...", simulation.value.logs);
-    //   return {
-    //     success: false,
-    //     reason: "simulation_failed..",
-    //     details: simulation.value.err,
-    //     logs: simulation.value.logs,
-    //   };
-    // }
+          console.log("logs:...", simulation.value.err);
+    console.log("logs:...", simulation.value.logs);
+      return {
+        success: false,
+        reason: "simulation_failed..",
+        details: simulation.value.err,
+        logs: simulation.value.logs,
+      };
+    }
 
 
     console.log("Simulation successful....");

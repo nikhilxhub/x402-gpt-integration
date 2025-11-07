@@ -4,7 +4,7 @@ dotenv.config();
 
 export const ENV = {
 
-    SOLANA_RPC_URL: process.env.SOLANA_RPC_URL || "https://api.mainnet-beta.solana.com",
+    SOLANA_RPC_URL: process.env.SOLANA_RPC_URL || "https://api.devnet.solana.com",
 
     
 

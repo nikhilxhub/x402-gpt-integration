@@ -16,7 +16,8 @@ export async function buildAndSignTransferTx(params: {
   const toPubkey = new PublicKey(params.to);
   const { blockhash, lastValidBlockHeight } =
     await params.connection.getLatestBlockhash("finalized");
-
+    const { connection } = params;
+ 
   const ix = SystemProgram.transfer({
     fromPubkey: params.from.publicKey,
     toPubkey,
@@ -25,7 +26,7 @@ export async function buildAndSignTransferTx(params: {
 
   const tx = new Transaction({
     blockhash: blockhash,
-    lastValidBlockHeight: lastValidBlockHeight,
+    lastValidBlockHeight: (await connection.getLatestBlockhash()).lastValidBlockHeight,
     feePayer: params.from.publicKey,
   }).add(ix);
   
