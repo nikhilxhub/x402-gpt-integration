@@ -12,6 +12,7 @@ import { loadWallet } from "./wallet/loadWallet";
 import { askPrompt } from "./prompt/askPrompt";
 import { changeModel } from "./commands/changeModel";
 import { changeCluster } from "./commands/changeCluster";
+import { sendPremiumPrompt } from "./apis/sendPremiumPrompt";
 
 
 

@@ -10,9 +10,10 @@
     "db:deploy": "pnpm prisma migrate deploy && pnpm run generate",
     "studio": "npx prisma studio"
   },
-  "exports": {
-    "./client": "./index.ts"
+  "exports":{
+    "./client": "./index.js"
   },
+
   "devDependencies": {
     "prisma": "^6.18.0"
   },
