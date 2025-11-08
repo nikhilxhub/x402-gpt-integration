@@ -130,7 +130,6 @@ export async function runCli() {
             spinner.succeed("Paid & received response!");
             console.log(chalk.greenBright("\nAnswer:\n"));
             // console.log(result.ai);
-            // showResult(result.ai);
             const formattedOutput = cliMarkdown(result.ai);
             console.log(formattedOutput);
 
