@@ -13,7 +13,7 @@ import { askPrompt } from "./prompt/askPrompt";
 import { changeModel } from "./commands/changeModel";
 import { changeCluster } from "./commands/changeCluster";
 import { sendPremiumPrompt } from "./apis/sendPremiumPrompt";
-
+import cliMarkdown from "cli-markdown";
 
 
 function showBanner(){
@@ -21,6 +21,7 @@ function showBanner(){
     console.log(chalk.magentaBright(art));
 
 }
+
 
 function showHelp(){
 
@@ -128,7 +129,11 @@ export async function runCli() {
 
             spinner.succeed("Paid & received response!");
             console.log(chalk.greenBright("\nAnswer:\n"));
-            console.log(result.ai);
+            // console.log(result.ai);
+            // showResult(result.ai);
+            const formattedOutput = cliMarkdown(result.ai);
+            console.log(formattedOutput);
+
             console.log(chalk.gray(`\nTx: ${result.paidTxSignature}\n`));
 
         }catch(e: any){
