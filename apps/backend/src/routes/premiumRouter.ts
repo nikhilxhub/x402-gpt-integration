@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 import { validatePremiumBody } from "../middleware/requestValidation";
 
-import { findApiKeyToModel, findApiKeyToModel2 } from "../db/prisma";
+import { findApiKeyToModel2 } from "../db/prisma";
 
 import { createPaymentRequest } from "../services/paymentService";
 import { verifyAndSendSignedTransaction } from "../services/verifyAndSendSignedTransaction";
