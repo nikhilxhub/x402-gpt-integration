@@ -1,7 +1,7 @@
 import { Request, Response, Router } from "express";
 import { validatePremiumBody } from "../middleware/requestValidation";
 
-import { findApiKeyToModel } from "../db/prisma";
+import { findApiKeyToModel, findApiKeyToModel2 } from "../db/prisma";
 
 import { createPaymentRequest } from "../services/paymentService";
 import { verifyAndSendSignedTransaction } from "../services/verifyAndSendSignedTransaction";
@@ -23,7 +23,7 @@ premiumRouter.post(
 
       // bring api-key
 
-      const apiKeyEntry = await findApiKeyToModel(model);
+      const apiKeyEntry = await findApiKeyToModel2(model);
 
       if (!apiKeyEntry) {
         return res.status(404).json({ error: "model/api key not found" });

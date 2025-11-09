@@ -1,12 +1,16 @@
 import inquirer from "inquirer";
 
 export async function askPrompt() {
-  const { prompt } = await inquirer.prompt<{ prompt: string }>([
+  
+  const { prompt } = await inquirer.prompt([
     {
       type: "input",
+
       name: "prompt",
-      message: "Enter your prompt (or type :help):"
+      message: "Enter your prompt (or type :help):",
+
     }
+    
   ]);
   return prompt.trim();
 }

@@ -16,9 +16,10 @@ import { sendPremiumPrompt } from "./apis/sendPremiumPrompt";
 import cliMarkdown from "cli-markdown";
 
 
+
 function showBanner(){
-    const art = figlet.textSync("x402");
-    console.log(chalk.magentaBright(art));
+    const art = figlet.textSync("Askx402");
+    console.log(chalk.blueBright(art));
 
 }
 
@@ -74,8 +75,11 @@ export async function runCli() {
     showHelp();
 
 
+
     while(true){
         const input = await askPrompt();
+        // const input = await askPrompt2(rl);
+        
 
         if(!input){
             continue;
@@ -142,7 +146,9 @@ export async function runCli() {
         
     }
 
-    log.ok("GoodBye..!");
+
+
+    log.ok("See you Again..!");
 
 }
 
