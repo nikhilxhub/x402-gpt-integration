@@ -1,4 +1,4 @@
-# 🤖 Askx402 
+# 🤖 Agentx402 
 
 A pay-per-prompt application giving users on-demand access to premium AI models (like GPT, Gemini, and Groq) without the need for monthly subscriptions.
 CLI is working..
