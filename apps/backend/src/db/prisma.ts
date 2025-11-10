@@ -31,7 +31,7 @@ const apiKeyMap: Record<string, ApiKeyRecord> = {
   },
   "groq": {
     ai_model: "groq",
-    api_key: process.env.GROQ_API_KEY ?? "",
+    api_key: process.env.groq_API_KEY ?? "",
     owner_sol: process.env.DEFAULT_OWNER ?? "",
     rate_per_request: 1000000,
   },
