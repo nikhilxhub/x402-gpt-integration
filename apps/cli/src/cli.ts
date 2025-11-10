@@ -14,6 +14,7 @@ import { changeModel } from "./commands/changeModel";
 import { changeCluster } from "./commands/changeCluster";
 import { sendPremiumPrompt } from "./apis/sendPremiumPrompt";
 import cliMarkdown from "cli-markdown";
+import { showBanner2 } from "./utils/showBanner2";
 
 
 
@@ -41,7 +42,7 @@ function showHelp(){
 
 
 export async function runCli() {
-    showBanner();
+    showBanner2();
 
     let cfg = loadConfig();
     let kp;

@@ -1,136 +1,68 @@
-# Turborepo starter
+# 🤖 agentx402 (askx402)
 
-This Turborepo starter is maintained by the Turborepo core team.
+A pay-per-prompt application giving users on-demand access to premium AI models (like GPT, Gemini, and Groq) without the need for monthly subscriptions.
+CLI is working..
 
-## Using this example
+**Backend URL:** `https://agentx402.onrender.com`
 
-Run the following command:
+---
 
-```sh
-npx create-turbo@latest
-```
+## 🚀 The Problem
 
-## What's inside?
+Users who want to access high-performance AI models often face two choices:
+1.  Pay expensive monthly subscriptions, even for infrequent use.
+2.  Manage multiple API keys, complex billing, and worry about auto-pay.
 
-This Turborepo includes the following packages/apps:
+This creates a barrier for developers and users who just want to "pay for what they use."
 
-### Apps and Packages
+## 💡 The Solution
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+**Agentx402** solves this by leveraging the **Solana** blockchain for billing. It's built on the **x402 payment standard**, a protocol for on-chain, per-request payments.
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+Instead of a subscription, you pay a tiny amount of SOL (from your wallet) for *each prompt* you send. It's transparent, on-chain, and you never have to enter a credit card or manage a subscription.
 
-### Utilities
+---
 
-This Turborepo has some additional tools already setup for you:
+## ⚙️ How It Works
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+The project uses a two-request "challenge" flow, standard for the x402 protocol.
 
-### Build
 
-To build all apps and packages, run the following command:
 
-```
-cd my-turborepo
+[Image of x402 payment flow diagram]
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
-```
+1.  **Request (Attempt 1):** The user (via the CLI or frontend) sends a prompt and desired model to the backend.
+2.  **Challenge (402):** The backend receives the request, calculates the cost (in lamports), and responds with a `402 Payment Required` error. This response includes the *amount* to pay and the *receiver* wallet address.
+3.  **Payment:** The client (CLI/frontend) constructs a simple `SystemProgram.transfer` transaction, which the user signs with their connected wallet.
+4.  **Verification (Attempt 2):** The client re-sends the *original* request, but this time, it includes two new things:
+    * A header (`x402-signed-tx`) containing the signed, serialized transaction.
+    * A `payer` field in the JSON body (their public key).
+5.  **Success (200):** The backend receives the request, verifies the signature, confirms the payment on-chain, and *then* proxies the user's prompt to the premium AI model. The AI's response is streamed back to the user.
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+---
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
+## 📊 Project Status
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+* ✅ **Backend:** (Node.js / Express) Fully operational and deployed on Render. Handles on-chain verification and AI model proxying.
+* ✅ **CLI (`askx402`):** Complete. A command-line tool for engineers to interact with the backend (requires a local Solana keypair).
+* 🚧 **Frontend:** (Next.js) Under construction. A user-friendly web interface that uses the Solana Wallet-Adapter for payments.
 
-### Develop
+---
 
-To develop all apps and packages, run the following command:
+## 💻 Usage (CLI)
 
-```
-cd my-turborepo
+The `askx402` CLI is the primary way to interact with the service.
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
+*(You can update this section with your actual installation and usage commands)*
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
-```
+```bash
+# Example: Install the CLI (if published)
+# npm install -g askx402
 
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+# Example: Run a prompt
+# The CLI will detect the 402, prompt you to sign with your local keypair, and resubmit.
+askx402 --model groq "Explain the x402 payment standard in simple terms"
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
-# x402-gpt-integration
+# Example: Use a different model
+askx402 --model gemini-2.5-pro "Write a Solana Anchor program for a simple counter"
