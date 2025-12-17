@@ -23,6 +23,8 @@ export async function sendPremiumPrompt(opts:userPrompt) {
         if(r1.status == 200){
             return r1.data as PremiumResponseOK
         }
+        // log.info(`API Response 1 Status: ${r1.status}`);
+        // log.info(`API Response 1 Data: ${JSON.stringify(r1.data)}`);
 
         if(r1.status == 402 && r1.data?.paymentRequest){
             const  pr  = r1.data.paymentRequest as PaymentRequest;
@@ -38,19 +40,20 @@ export async function sendPremiumPrompt(opts:userPrompt) {
                 memo: pr.memo
 
             });
-
+            
             const signedBase64 = serializeTxBase64(raw);
-
+            
             const r2 = await axios.post(
                 url,
                 { prompt: opts.prompt, model: opts.modelKey },
                 {
-                headers: { "x402-signed-tx": signedBase64 },
-                validateStatus: () => true
+                    headers: { "x402-signed-tx": signedBase64 },
+                    validateStatus: () => true
                 }
             );
-
+            
             if (r2.status === 200) {
+
                 return r2.data as PremiumResponseOK;
             } else {
                 throw new Error(`Payment/LLM failed: ${r2.status} ${JSON.stringify(r2.data)}`);

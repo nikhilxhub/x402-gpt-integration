@@ -3,6 +3,9 @@
 A pay-per-prompt application giving users on-demand access to premium AI models (like GPT, Gemini, and Groq) without the need for monthly subscriptions.
 CLI is working..
 
+
+![Alt text](./AGENTx402.png)
+
 **Backend URL:** `https://agentx402.onrender.com`
 
 ---
